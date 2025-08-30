@@ -90,26 +90,40 @@
     <!-- Front Side -->
     <div class="card">
       <div class="photo">
-        <img src="front.jpg" alt="Licence Front"/>
+        <img src="front.jpg" alt="Licence Front" id="frontImg"/>
       </div>
     </div>
 
     <!-- Back Side -->
     <div class="card">
       <div class="photo">
-        <img src="back.jpg" alt="Licence Back"/>
+        <img src="back.jpg" alt="Licence Back" id="backImg"/>
       </div>
     </div>
 
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
 
-    <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
+    <!-- Download Image Button -->
+    <button class="download-btn" onclick="downloadImages()">Download Image</button>
   </div>
 
   <script>
-    function downloadPDF() {
-      window.print();
-      document.querySelector('.download-btn').style.display = 'none';
+    function downloadImages() {
+      // front image download
+      let frontLink = document.createElement("a");
+      frontLink.href = document.getElementById("frontImg").src;
+      frontLink.download = "Licence_Front.jpg";
+      document.body.appendChild(frontLink);
+      frontLink.click();
+      document.body.removeChild(frontLink);
+
+      // back image download
+      let backLink = document.createElement("a");
+      backLink.href = document.getElementById("backImg").src;
+      backLink.download = "Licence_Back.jpg";
+      document.body.appendChild(backLink);
+      backLink.click();
+      document.body.removeChild(backLink);
     }
   </script>
 </body>
