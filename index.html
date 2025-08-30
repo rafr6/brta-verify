@@ -23,7 +23,7 @@
     }
     .download-btn {
       display: inline-block;
-      margin: 15px 0;
+      margin: 10px 5px;
       padding: 10px 20px;
       background: #ff5722;
       color: white;
@@ -103,8 +103,9 @@
 
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
 
-    <!-- Download Image Button -->
+    <!-- Download Buttons -->
     <button class="download-btn" onclick="downloadImages()">Download Image</button>
+    <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
   </div>
 
   <script>
@@ -124,6 +125,10 @@
       document.body.appendChild(backLink);
       backLink.click();
       document.body.removeChild(backLink);
+    }
+
+    function downloadPDF() {
+      window.print();
     }
   </script>
 </body>
