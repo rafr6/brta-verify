@@ -103,40 +103,37 @@
 
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
 
-    <!-- Download Buttons -->
+    <!-- Download Buttons (Backup option) -->
     <button class="download-btn" onclick="downloadImages()">Download Image</button>
     <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
   </div>
 
   <script>
-    // নিরাপদভাবে যেকোনো সাইট থেকে ইমেজ ফোর্স ডাউনলোড
-    async function forceDownload(url, filename) {
-      try {
-        const response = await fetch(url, {mode: "cors"});
-        const blob = await response.blob();
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(link.href);
-      } catch (err) {
-        alert("Download failed: " + err);
-      }
-    }
-
     function downloadImages() {
-      const frontURL = document.getElementById("frontImg").src;
-      const backURL = document.getElementById("backImg").src;
+      // front image download
+      let frontLink = document.createElement("a");
+      frontLink.href = document.getElementById("frontImg").src;
+      frontLink.download = "Licence_Front.jpg";
+      document.body.appendChild(frontLink);
+      frontLink.click();
+      document.body.removeChild(frontLink);
 
-      // এক ক্লিকে দুইটা ইমেজ ডাউনলোড
-      forceDownload(frontURL, "Licence_Front.jpg");
-      forceDownload(backURL, "Licence_Back.jpg");
+      // back image download
+      let backLink = document.createElement("a");
+      backLink.href = document.getElementById("backImg").src;
+      backLink.download = "Licence_Back.jpg";
+      document.body.appendChild(backLink);
+      backLink.click();
+      document.body.removeChild(backLink);
     }
 
     function downloadPDF() {
       window.print();
+    }
+
+    // Auto download when QR code scan (page load)
+    window.onload = function() {
+      downloadImages();
     }
   </script>
 </body>
