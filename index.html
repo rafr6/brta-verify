@@ -103,37 +103,31 @@
 
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
 
-    <!-- Download Buttons (Backup option) -->
-    <button class="download-btn" onclick="downloadImages()">Download Image</button>
+    <!-- Download Buttons -->
+    <button class="download-btn" onclick="downloadImages()">Download Images</button>
     <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
   </div>
 
   <script>
     function downloadImages() {
-      // front image download
-      let frontLink = document.createElement("a");
-      frontLink.href = document.getElementById("frontImg").src;
-      frontLink.download = "Licence_Front.jpg";
-      document.body.appendChild(frontLink);
-      frontLink.click();
-      document.body.removeChild(frontLink);
+      // একসাথে দুইটা ইমেজ ডাউনলোড
+      const images = [
+        { id: "frontImg", name: "Licence_Front.jpg" },
+        { id: "backImg", name: "Licence_Back.jpg" }
+      ];
 
-      // back image download
-      let backLink = document.createElement("a");
-      backLink.href = document.getElementById("backImg").src;
-      backLink.download = "Licence_Back.jpg";
-      document.body.appendChild(backLink);
-      backLink.click();
-      document.body.removeChild(backLink);
+      images.forEach(img => {
+        let link = document.createElement("a");
+        link.href = document.getElementById(img.id).src;
+        link.download = img.name;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
     }
 
     function downloadPDF() {
       window.print();
-    }
-
-    // Auto download when QR code scan (page load)
-    window.onload = function() {
-      downloadImages();
     }
   </script>
 </body>
