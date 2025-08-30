@@ -109,22 +109,30 @@
   </div>
 
   <script>
-    function downloadImages() {
-      // front image download
-      let frontLink = document.createElement("a");
-      frontLink.href = document.getElementById("frontImg").src;
-      frontLink.download = "Licence_Front.jpg";
-      document.body.appendChild(frontLink);
-      frontLink.click();
-      document.body.removeChild(frontLink);
+    // নিরাপদভাবে যেকোনো সাইট থেকে ইমেজ ফোর্স ডাউনলোড
+    async function forceDownload(url, filename) {
+      try {
+        const response = await fetch(url, {mode: "cors"});
+        const blob = await response.blob();
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+      } catch (err) {
+        alert("Download failed: " + err);
+      }
+    }
 
-      // back image download
-      let backLink = document.createElement("a");
-      backLink.href = document.getElementById("backImg").src;
-      backLink.download = "Licence_Back.jpg";
-      document.body.appendChild(backLink);
-      backLink.click();
-      document.body.removeChild(backLink);
+    function downloadImages() {
+      const frontURL = document.getElementById("frontImg").src;
+      const backURL = document.getElementById("backImg").src;
+
+      // এক ক্লিকে দুইটা ইমেজ ডাউনলোড
+      forceDownload(frontURL, "Licence_Front.jpg");
+      forceDownload(backURL, "Licence_Back.jpg");
     }
 
     function downloadPDF() {
