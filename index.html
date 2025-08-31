@@ -109,6 +109,9 @@
 
     /* Print Styles */
     @media print {
+      body {
+        display: block;
+      }
       .download-btn,
       .top-header,
       .dots,
@@ -128,7 +131,7 @@
       }
       .slide {
         min-width: auto !important;
-        margin-bottom: 10px; /* কার্ডের মধ্যে গ্যাপ */
+        margin-bottom: 5px; /* গ্যাপ কমানো হয়েছে */
         display: flex;
         justify-content: center;
       }
