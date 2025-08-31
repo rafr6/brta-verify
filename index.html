@@ -13,7 +13,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh; /* পুরো ভিউপোর্ট */
+      min-height: 100vh;
     }
     .container {
       max-width: 800px;
@@ -38,8 +38,18 @@
       .download-btn,
       .top-header,
       .active-label,
-      .footer {
+      .footer,
+      .dots {
         display: none !important;
+      }
+      .slider {
+        display: block !important;
+        width: 100% !important;
+        transform: none !important;
+      }
+      .slide {
+        min-width: auto !important;
+        margin-bottom: 20px;
       }
     }
     .top-header {
@@ -50,14 +60,12 @@
       margin-bottom: 15px;
       font-size: 1.4em;
     }
-
-    /* Slider wrapper */
     .slider-wrapper {
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden; /* ব্যাক পৃষ্ঠা আগে থেকে দেখা যাবে না */
+      overflow: hidden;
       width: 100%;
       max-width: 500px;
       margin: auto;
@@ -65,17 +73,17 @@
     .slider {
       display: flex;
       transition: transform 0.4s ease-in-out;
-      width: 200%; /* দুই স্লাইড */
+      width: 200%;
     }
     .slide {
       min-width: 100%;
-      min-height: 450px; /* কার্ডের জন্য জায়গা */
+      min-height: 450px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     .slide img {
-      max-width: 500px; /* কার্ড ফিক্সড সাইজ */
+      max-width: 500px;
       width: 100%;
       height: auto;
       border-radius: 10px;
@@ -83,8 +91,6 @@
       object-fit: contain;
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
-
-    /* ACTIVE টেক্সট */
     .active-label {
       position: absolute;
       top: 15px;
@@ -101,8 +107,6 @@
       font-size: 0.85em;
       color: #888;
     }
-
-    /* Dot Navigation */
     .dots {
       text-align: center;
       margin-top: 15px;
@@ -123,38 +127,25 @@
   </style>
 </head>
 <body>
-
   <div class="container">
     <div class="top-header">BRTA LICENCE VERIFICATION</div>
-
-    <!-- Slider Wrapper -->
     <div class="slider-wrapper">
-      <!-- ACTIVE label (কার্ডের উপরে) -->
       <span class="active-label">ACTIVE</span>
-
-      <!-- Slider -->
       <div class="slider" id="slider">
-        <!-- Front Side -->
         <div class="slide">
           <img src="front.jpg" alt="Licence Front" id="frontImg"/>
         </div>
-        <!-- Back Side -->
         <div class="slide">
           <img src="back.jpg" alt="Licence Back" id="backImg"/>
         </div>
       </div>
     </div>
-
-    <!-- Dot Navigation -->
     <div class="dots">
       <span class="dot active" onclick="goToSlide(0)"></span>
       <span class="dot" onclick="goToSlide(1)"></span>
     </div>
-
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
-
-    <!-- Download Buttons -->
-    <button class="download-btn" onclick="downloadImages()">Download Images</button>
+    <!-- Only PDF Download Button -->
     <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
   </div>
 
@@ -183,30 +174,11 @@
     slider.addEventListener("touchend", e => {
       let endX = e.changedTouches[0].clientX;
       if (startX - endX > 50) {
-        // swipe left
         if (currentSlide < 1) goToSlide(currentSlide + 1);
       } else if (endX - startX > 50) {
-        // swipe right
         if (currentSlide > 0) goToSlide(currentSlide - 1);
       }
     });
-
-    function downloadImages() {
-      // একসাথে দুইটা ইমেজ ডাউনলোড
-      const images = [
-        { id: "frontImg", name: "Licence_Front.jpg" },
-        { id: "backImg", name: "Licence_Back.jpg" }
-      ];
-
-      images.forEach(img => {
-        let link = document.createElement("a");
-        link.href = document.getElementById(img.id).src;
-        link.download = img.name;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-    }
 
     function downloadPDF() {
       window.print();
