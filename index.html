@@ -21,7 +21,6 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      position: relative;
       text-align: center;
     }
     .download-btn {
@@ -53,6 +52,12 @@
     }
 
     /* Slider wrapper */
+    .slider-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .slider {
       display: flex;
       transition: transform 0.4s ease-in-out;
@@ -78,11 +83,14 @@
     /* ACTIVE টেক্সট */
     .active-label {
       position: absolute;
-      top: 10px;
-      right: 20px;
+      top: 15px;
+      right: 25px;
       font-size: 1.6em;
       font-weight: bold;
       color: green;
+      background: rgba(255,255,255,0.7);
+      padding: 2px 8px;
+      border-radius: 5px;
     }
     .footer {
       margin-top: 20px;
@@ -114,18 +122,22 @@
 
   <div class="container">
     <div class="top-header">BRTA LICENCE VERIFICATION</div>
-    <!-- ACTIVE label -->
-    <span class="active-label">ACTIVE</span>
 
-    <!-- Slider -->
-    <div class="slider" id="slider">
-      <!-- Front Side -->
-      <div class="slide">
-        <img src="front.jpg" alt="Licence Front" id="frontImg"/>
-      </div>
-      <!-- Back Side -->
-      <div class="slide">
-        <img src="back.jpg" alt="Licence Back" id="backImg"/>
+    <!-- Slider Wrapper -->
+    <div class="slider-wrapper">
+      <!-- ACTIVE label (কার্ডের উপরে) -->
+      <span class="active-label">ACTIVE</span>
+
+      <!-- Slider -->
+      <div class="slider" id="slider">
+        <!-- Front Side -->
+        <div class="slide">
+          <img src="front.jpg" alt="Licence Front" id="frontImg"/>
+        </div>
+        <!-- Back Side -->
+        <div class="slide">
+          <img src="back.jpg" alt="Licence Back" id="backImg"/>
+        </div>
       </div>
     </div>
 
