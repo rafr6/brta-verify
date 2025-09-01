@@ -35,7 +35,7 @@
       font-size: 1em;
     }
     .top-header {
-      background: linear-gradient(90deg, #0056b3, #0099cc);
+      background: linear-gradient(90deg, #006400, #0099cc); /* বাম পাশে গাঢ় সবুজ, ডান পাশে আকাশি */
       color: white;
       padding: 15px;
       border-radius: 6px;
@@ -139,11 +139,11 @@
       .dots,
       .footer,
       .active-label,
-      .top-header { /* হেডার আর দেখা যাবে না */
+      .top-header { /* হেডার প্রিন্টে লুকানো */
         display: none !important;
       }
       .slider-wrapper {
-        background: none !important; /* প্রিন্টে ব্যাকগ্রাউন্ড বাদ */
+        background: none !important;
         overflow: visible !important;
         display: flex;
         flex-direction: column;
@@ -157,7 +157,7 @@
       }
       .slide {
         min-width: auto !important;
-        margin-bottom: 0px; /* গ্যাপ আরো কম */
+        margin-bottom: 0px; /* কার্ডের গ্যাপ কম */
         display: flex;
         justify-content: center;
       }
