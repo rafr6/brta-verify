@@ -22,7 +22,6 @@
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
-      position: relative;
     }
     .download-btn {
       display: inline-block;
@@ -127,17 +126,26 @@
       background-color: #007bff;
     }
 
-    /* New Name Box */
+    /* Name Page Style */
+    .name-page {
+      page-break-before: always;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+    }
     .name-box {
-      margin-top: 25px;
-      display: inline-block;
-      padding: 12px 25px;
-      border: 2px solid #007bff;
-      border-radius: 50px;
-      font-size: 1.1em;
+      border: 3px solid #007bff;
+      border-radius: 50%;
+      width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.4em;
       font-weight: bold;
-      color: #333;
-      background: #f9f9f9;
+      text-align: center;
+      line-height: 1.6em;
     }
 
     /* Print Styles */
@@ -183,7 +191,7 @@
       <img src="logo-right.png" alt="Right Logo"/>
     </div>
 
-    <!-- Card Slider -->
+    <!-- Card Page -->
     <div class="slider-wrapper">
       <span class="active-label">ACTIVE</span>
       <div class="slider" id="slider">
@@ -195,19 +203,18 @@
         </div>
       </div>
     </div>
-
-    <!-- Navigation Dots -->
     <div class="dots">
       <span class="dot active" onclick="goToSlide(0)"></span>
       <span class="dot" onclick="goToSlide(1)"></span>
     </div>
 
-    <!-- Name Box -->
-    <div class="name-box">
-      নাম/Name : MD RAHIM MIA
+    <!-- Name Page -->
+    <div class="name-page">
+      <div class="name-box">
+        নাম / Name : <br> MD RAHIM MIA
+      </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
     <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
   </div>
@@ -229,7 +236,23 @@
       });
     }
 
-    // Swipe support
+    // Swipe support (mobile)
     let startX = 0;
     slider.addEventListener("touchstart", e => {
-      startX = e.touches[0]()
+      startX = e.touches[0].clientX;
+    });
+    slider.addEventListener("touchend", e => {
+      let endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) {
+        if (currentSlide < 1) goToSlide(currentSlide + 1);
+      } else if (endX - startX > 50) {
+        if (currentSlide > 0) goToSlide(currentSlide - 1);
+      }
+    });
+
+    function downloadPDF() {
+      window.print();
+    }
+  </script>
+</body>
+</html>
