@@ -35,7 +35,7 @@
       font-size: 1em;
     }
     .top-header {
-      background: #007bff;
+      background: linear-gradient(90deg, #0056b3, #0099cc);
       color: white;
       padding: 15px;
       border-radius: 6px;
@@ -70,6 +70,9 @@
       width: 100%;
       max-width: 500px;
       margin: auto;
+      background: rgba(0, 153, 204, 0.05); /* হালকা ব্যাকগ্রাউন্ড */
+      border-radius: 10px;
+      padding: 10px;
     }
     .slider {
       display: flex;
@@ -126,44 +129,26 @@
       background-color: #007bff;
     }
 
-    /* Name Page Style */
-    .name-page {
-      page-break-before: always;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 600px;
-    }
-    .name-box {
-      border: 3px solid #007bff;
-      border-radius: 50%;
-      width: 300px;
-      height: 300px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.4em;
-      font-weight: bold;
-      text-align: center;
-      line-height: 1.6em;
-    }
-
     /* Print Styles */
     @media print {
       body {
         display: block;
+        background: white !important;
       }
       .download-btn,
       .dots,
       .footer,
-      .active-label { 
+      .active-label,
+      .top-header { /* হেডার আর দেখা যাবে না */
         display: none !important;
       }
       .slider-wrapper {
+        background: none !important; /* প্রিন্টে ব্যাকগ্রাউন্ড বাদ */
         overflow: visible !important;
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 0 !important;
       }
       .slider {
         display: block !important;
@@ -172,7 +157,7 @@
       }
       .slide {
         min-width: auto !important;
-        margin-bottom: 1px;
+        margin-bottom: 0px; /* গ্যাপ আরো কম */
         display: flex;
         justify-content: center;
       }
@@ -181,7 +166,7 @@
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
+    <!-- Updated Header -->
     <div class="top-header">
       <img src="logo-left.png" alt="Left Logo"/>
       <div class="header-text">
@@ -191,7 +176,6 @@
       <img src="logo-right.png" alt="Right Logo"/>
     </div>
 
-    <!-- Card Page -->
     <div class="slider-wrapper">
       <span class="active-label">ACTIVE</span>
       <div class="slider" id="slider">
@@ -207,14 +191,6 @@
       <span class="dot active" onclick="goToSlide(0)"></span>
       <span class="dot" onclick="goToSlide(1)"></span>
     </div>
-
-    <!-- Name Page -->
-    <div class="name-page">
-      <div class="name-box">
-        নাম / Name : <br> MD RAHIM MIA
-      </div>
-    </div>
-
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
     <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
   </div>
