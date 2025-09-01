@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -37,10 +37,29 @@
     .top-header {
       background: #007bff;
       color: white;
-      padding: 10px;
+      padding: 15px;
       border-radius: 6px;
       margin-bottom: 15px;
-      font-size: 1.4em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-text {
+      flex: 1;
+      text-align: center;
+      line-height: 1.4em;
+    }
+    .header-text .bangla {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+    .header-text .english {
+      font-size: 1em;
+    }
+    .top-header img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
     }
     .slider-wrapper {
       position: relative;
@@ -113,7 +132,6 @@
         display: block;
       }
       .download-btn,
-      .top-header,
       .dots,
       .footer,
       .active-label { /* ACTIVE লেখা দেখা যাবে না */
@@ -141,7 +159,16 @@
 </head>
 <body>
   <div class="container">
-    <div class="top-header">BRTA LICENCE VERIFICATION</div>
+    <!-- Updated Header -->
+    <div class="top-header">
+      <img src="logo-left.png" alt="Left Logo"/>
+      <div class="header-text">
+        <div class="bangla">গণপ্রজাতন্ত্রী বাংলাদেশ</div>
+        <div class="english">People's Republic of Bangladesh</div>
+      </div>
+      <img src="logo-right.png" alt="Right Logo"/>
+    </div>
+
     <div class="slider-wrapper">
       <span class="active-label">ACTIVE</span>
       <div class="slider" id="slider">
