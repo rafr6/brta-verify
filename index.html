@@ -22,6 +22,7 @@
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
+      position: relative;
     }
     .download-btn {
       display: inline-block;
@@ -126,6 +127,19 @@
       background-color: #007bff;
     }
 
+    /* New Name Box */
+    .name-box {
+      margin-top: 25px;
+      display: inline-block;
+      padding: 12px 25px;
+      border: 2px solid #007bff;
+      border-radius: 50px;
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #333;
+      background: #f9f9f9;
+    }
+
     /* Print Styles */
     @media print {
       body {
@@ -134,7 +148,7 @@
       .download-btn,
       .dots,
       .footer,
-      .active-label { /* ACTIVE লেখা দেখা যাবে না */
+      .active-label { 
         display: none !important;
       }
       .slider-wrapper {
@@ -150,7 +164,7 @@
       }
       .slide {
         min-width: auto !important;
-        margin-bottom: 1px; /* ফ্রন্ট-ব্যাক কার্ডের গ্যাপ কমানো হয়েছে */
+        margin-bottom: 1px;
         display: flex;
         justify-content: center;
       }
@@ -159,7 +173,7 @@
 </head>
 <body>
   <div class="container">
-    <!-- Updated Header -->
+    <!-- Header -->
     <div class="top-header">
       <img src="logo-left.png" alt="Left Logo"/>
       <div class="header-text">
@@ -169,6 +183,7 @@
       <img src="logo-right.png" alt="Right Logo"/>
     </div>
 
+    <!-- Card Slider -->
     <div class="slider-wrapper">
       <span class="active-label">ACTIVE</span>
       <div class="slider" id="slider">
@@ -180,10 +195,19 @@
         </div>
       </div>
     </div>
+
+    <!-- Navigation Dots -->
     <div class="dots">
       <span class="dot active" onclick="goToSlide(0)"></span>
       <span class="dot" onclick="goToSlide(1)"></span>
     </div>
+
+    <!-- Name Box -->
+    <div class="name-box">
+      নাম/Name : MD RAHIM MIA
+    </div>
+
+    <!-- Footer -->
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
     <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
   </div>
@@ -205,23 +229,7 @@
       });
     }
 
-    // Swipe support (mobile)
+    // Swipe support
     let startX = 0;
     slider.addEventListener("touchstart", e => {
-      startX = e.touches[0].clientX;
-    });
-    slider.addEventListener("touchend", e => {
-      let endX = e.changedTouches[0].clientX;
-      if (startX - endX > 50) {
-        if (currentSlide < 1) goToSlide(currentSlide + 1);
-      } else if (endX - startX > 50) {
-        if (currentSlide > 0) goToSlide(currentSlide - 1);
-      }
-    });
-
-    function downloadPDF() {
-      window.print();
-    }
-  </script>
-</body>
-</html>
+      startX = e.touches[0]()
