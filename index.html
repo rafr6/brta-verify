@@ -25,7 +25,7 @@
       position: relative;
     }
     .download-btn {
-      display: none; /* ডিফল্টে হাইড */
+      display: none; /* শুরুতে হাইড */
       margin: 10px 5px;
       padding: 10px 20px;
       background: #ff5722;
@@ -36,8 +36,8 @@
       font-size: 1em;
       position: absolute;
       bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
+      right: 15px;
+      z-index: 20;
     }
     .top-header {
       background: linear-gradient(90deg, #0099cc, #8BC34A);
@@ -54,10 +54,18 @@
       text-align: center;
       line-height: 1.4em;
     }
-    .header-text .bangla { font-size: 1.3em; font-weight: bold; }
-    .header-text .english { font-size: 1em; }
-    .top-header img { width: 50px; height: 50px; object-fit: contain; }
-
+    .header-text .bangla {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+    .header-text .english {
+      font-size: 1em;
+    }
+    .top-header img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
     .slider-wrapper {
       position: relative;
       display: flex;
@@ -91,7 +99,7 @@
       border: 1px solid #ddd;
       object-fit: contain;
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      cursor: pointer; /* ইঙ্গিত দেবে টাচ করা যায় */
+      cursor: pointer; /* টাচ/ক্লিক করার ইঙ্গিত */
     }
     .active-label {
       position: absolute;
@@ -109,7 +117,10 @@
       font-size: 0.85em;
       color: #888;
     }
-    .dots { text-align: center; margin-top: 15px; }
+    .dots {
+      text-align: center;
+      margin-top: 15px;
+    }
     .dot {
       display: inline-block;
       height: 12px;
@@ -120,12 +131,22 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-    .dot.active { background-color: #007bff; }
-
+    .dot.active {
+      background-color: #007bff;
+    }
     /* Print Styles */
     @media print {
-      body { display: block; background: white !important; }
-      .download-btn, .dots, .footer, .active-label, .top-header { display: none !important; }
+      body {
+        display: block;
+        background: white !important;
+      }
+      .download-btn,
+      .dots,
+      .footer,
+      .active-label,
+      .top-header {
+        display: none !important;
+      }
       .slider-wrapper {
         background: none !important;
         overflow: visible !important;
@@ -159,7 +180,6 @@
       </div>
       <img src="logo-right.png" alt="Right Logo"/>
     </div>
-
     <div class="slider-wrapper">
       <span class="active-label">ACTIVE</span>
       <div class="slider" id="slider">
@@ -171,12 +191,10 @@
         </div>
       </div>
     </div>
-
     <div class="dots">
       <span class="dot active" onclick="goToSlide(0)"></span>
       <span class="dot" onclick="goToSlide(1)"></span>
     </div>
-
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
     <button class="download-btn" id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
   </div>
@@ -185,21 +203,32 @@
     let currentSlide = 0;
     const slider = document.getElementById("slider");
     const dots = document.querySelectorAll(".dot");
+    const frontImg = document.getElementById("frontImg");
+    const backImg = document.getElementById("backImg");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const container = document.getElementById("container");
 
     function goToSlide(n) {
       currentSlide = n;
       slider.style.transform = `translateX(-${n * 100}%)`;
       updateDots();
     }
+
     function updateDots() {
       dots.forEach((dot, index) => {
         dot.classList.toggle("active", index === currentSlide);
       });
     }
 
+    // Touch image to flip
+    frontImg.addEventListener("click", () => goToSlide(1));
+    backImg.addEventListener("click", () => goToSlide(0));
+
     // Swipe support (mobile)
     let startX = 0;
-    slider.addEventListener("touchstart", e => { startX = e.touches[0].clientX; });
+    slider.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
     slider.addEventListener("touchend", e => {
       let endX = e.changedTouches[0].clientX;
       if (startX - endX > 50) {
@@ -209,19 +238,11 @@
       }
     });
 
-    // Front/Back toggle by clicking image
-    document.getElementById("frontImg").addEventListener("click", () => goToSlide(1));
-    document.getElementById("backImg").addEventListener("click", () => goToSlide(0));
-
-    // Toggle PDF button by tapping anywhere in container
-    const container = document.getElementById("container");
-    const downloadBtn = document.getElementById("downloadBtn");
-    let btnVisible = false;
-    container.addEventListener("click", (e) => {
-      if (e.target.tagName !== "IMG") { // ইমেজ টগল বাদ দিয়ে
-        btnVisible = !btnVisible;
-        downloadBtn.style.display = btnVisible ? "block" : "none";
-      }
+    // Download button toggle on tap
+    container.addEventListener("click", function(e) {
+      if (e.target.classList.contains("download-btn")) return;
+      downloadBtn.style.display =
+        downloadBtn.style.display === "block" ? "none" : "block";
     });
 
     function downloadPDF() {
