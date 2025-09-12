@@ -24,11 +24,12 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
       position: relative;
+      margin-bottom: 60px; /* Footer space */
     }
     .download-btn {
       display: none;
       position: fixed;
-      bottom: 100px; /* উপরে তুলেছি */
+      bottom: 80px; /* উপরে তুলা হয়েছে */
       left: 50%;
       transform: translateX(-50%);
       padding: 12px 24px;
@@ -78,8 +79,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      z-index: 1;
+      margin-bottom: 20px; /* Footer থেকে স্পেস */
     }
     .flip-card {
       position: relative;
@@ -110,12 +110,10 @@
     }
 
     .footer {
-      margin-top: 20px;
       font-size: 0.9em;
       color: #888;
       text-align: center;
-      position: relative;
-      z-index: 2; /* ছবির উপরে দেখাবে */
+      margin-bottom: 20px; /* Footer spacing from bottom */
     }
 
     /* Print Styles */
@@ -166,10 +164,10 @@
         </div>
       </div>
     </div>
-
-    <!-- Footer -->
-    <div class="footer">© 2025 BRTA. All rights reserved.</div>
   </div>
+
+  <!-- Footer -->
+  <div class="footer">© 2025 BRTA. All rights reserved.</div>
 
   <!-- Download PDF Button -->
   <button class="download-btn" id="pdfBtn" onclick="downloadPDF()">Download PDF</button>
