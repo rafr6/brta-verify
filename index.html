@@ -28,7 +28,7 @@
     .download-btn {
       display: none;
       position: fixed;
-      bottom: 40px;
+      bottom: 100px; /* উপরে তুলেছি */
       left: 50%;
       transform: translateX(-50%);
       padding: 12px 24px;
@@ -78,6 +78,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      z-index: 1;
     }
     .flip-card {
       position: relative;
@@ -108,10 +110,12 @@
     }
 
     .footer {
-      margin-top: 25px;
+      margin-top: 20px;
       font-size: 0.9em;
       color: #888;
       text-align: center;
+      position: relative;
+      z-index: 2; /* ছবির উপরে দেখাবে */
     }
 
     /* Print Styles */
