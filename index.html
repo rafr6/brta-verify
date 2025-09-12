@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f5f9;
+      background: #e9ecef; /* হেডারের সাথে আলাদা ব্যাকগ্রাউন্ড */
       margin: 0;
       padding: 0;
       display: flex;
@@ -35,7 +35,7 @@
       cursor: pointer;
       font-size: 1em;
       position: fixed;
-      bottom: 80px;   /* আগের 20px থেকে বাড়িয়ে উপরে আনা হলো */
+      bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 999;
@@ -113,22 +113,34 @@
       color: #888;
     }
 
+    /* Print-only section */
+    #print-area {
+      display: none;
+    }
+    #print-area img {
+      width: 100%;
+      max-width: 500px;
+      margin: 15px auto;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      display: block;
+    }
+
     /* Print Styles */
     @media print {
       body {
-        display: block;
         background: white !important;
       }
       .download-btn,
       .footer,
-      .top-header {
+      .top-header,
+      .flip-wrapper {
         display: none !important;
       }
-      .flip-wrapper {
-        perspective: none !important;
-      }
-      .flip-card {
-        transform: none !important;
+      #print-area {
+        display: block !important;
+        text-align: center;
       }
     }
   </style>
@@ -155,6 +167,12 @@
           <img src="back.jpg" alt="Licence Back"/>
         </div>
       </div>
+    </div>
+
+    <!-- Hidden print section -->
+    <div id="print-area">
+      <img src="front.jpg" alt="Licence Front Print"/>
+      <img src="back.jpg" alt="Licence Back Print"/>
     </div>
 
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
