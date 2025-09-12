@@ -11,7 +11,8 @@
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       min-height: 100vh;
     }
     .container {
@@ -22,13 +23,14 @@
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: relative;
     }
     .download-btn {
       display: none;
-      margin: 15px auto;
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
       padding: 12px 24px;
       background: #ff5722;
       color: white;
@@ -36,6 +38,7 @@
       border-radius: 6px;
       cursor: pointer;
       font-size: 1em;
+      z-index: 1000;
       transition: opacity 0.3s;
     }
     .top-header {
@@ -47,7 +50,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
     }
     .header-text {
       flex: 1;
@@ -72,7 +74,7 @@
       perspective: 1000px;
       margin: 0 auto;
       width: 100%;
-      max-width: 600px;
+      max-width: 650px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -80,13 +82,10 @@
     .flip-card {
       position: relative;
       width: 100%;
-      height: auto;
+      max-width: 600px;
       transform-style: preserve-3d;
       transition: transform 0.6s;
       cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
     .flip-card.flip {
       transform: rotateY(180deg);
@@ -95,12 +94,8 @@
       position: absolute;
       width: 100%;
       backface-visibility: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
     .flip-card img {
-      max-width: 600px;
       width: 100%;
       height: auto;
       border-radius: 12px;
@@ -117,7 +112,6 @@
       font-size: 0.9em;
       color: #888;
       text-align: center;
-      width: 100%;
     }
 
     /* Print Styles */
@@ -171,34 +165,32 @@
 
     <!-- Footer -->
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
-
-    <!-- Download PDF Button -->
-    <button class="download-btn" id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
   </div>
+
+  <!-- Download PDF Button -->
+  <button class="download-btn" id="pdfBtn" onclick="downloadPDF()">Download PDF</button>
 
   <script>
     const flipCard = document.getElementById("flipCard");
-    const downloadBtn = document.getElementById("downloadBtn");
-    let timeout;
+    const pdfBtn = document.getElementById("pdfBtn");
+    let pdfTimeout;
 
-    // Flip on card click
     flipCard.addEventListener("click", () => {
       flipCard.classList.toggle("flip");
     });
 
-    // Download PDF function
+    // Show PDF button on touch/click, hide after 3 seconds
+    document.body.addEventListener("click", () => {
+      pdfBtn.style.display = "inline-block";
+      clearTimeout(pdfTimeout);
+      pdfTimeout = setTimeout(() => {
+        pdfBtn.style.display = "none";
+      }, 3000);
+    });
+
     function downloadPDF() {
       window.print();
     }
-
-    // Show/hide PDF button on touch/click
-    document.body.addEventListener("click", () => {
-      downloadBtn.style.display = "inline-block";
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        downloadBtn.style.display = "none";
-      }, 3000); // 3 seconds
-    });
   </script>
 </body>
 </html>
