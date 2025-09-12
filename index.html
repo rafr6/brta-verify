@@ -25,7 +25,7 @@
       text-align: center;
     }
     .download-btn {
-      display: inline-block;
+      display: none; /* ডিফল্টে হাইড থাকবে */
       margin: 15px auto;
       padding: 12px 24px;
       background: #ff5722;
@@ -106,7 +106,7 @@
     .footer {
       margin-top: 25px;
       font-size: 0.9em;
-      color: #888;
+      color: #333; /* আরও স্পষ্ট কালার */
     }
 
     /* Print Styles */
@@ -116,7 +116,6 @@
         background: white !important;
       }
       .download-btn,
-      .footer,
       .top-header {
         display: none !important;
       }
@@ -159,13 +158,25 @@
     </div>
 
     <div class="footer">© 2025 BRTA. All rights reserved.</div>
-    <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
+    <button class="download-btn" id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
   </div>
 
   <script>
     const flipCard = document.getElementById("flipCard");
+    const downloadBtn = document.getElementById("downloadBtn");
+    let hideTimeout;
+
     flipCard.addEventListener("click", () => {
       flipCard.classList.toggle("flip");
+    });
+
+    // স্ক্রিনে টাচ করলে ডাউনলোড বাটন শো করবে
+    document.addEventListener("touchstart", () => {
+      downloadBtn.style.display = "inline-block";
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        downloadBtn.style.display = "none";
+      }, 3000); // ৩ সেকেন্ড পর আবার হাইড
     });
 
     function downloadPDF() {
