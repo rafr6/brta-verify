@@ -112,7 +112,7 @@
     .footer {
       margin-top: 25px;
       font-size: 0.9em;
-      color: #555;
+      color: #333;
       text-align: center;
       width: 100%;
     }
@@ -173,14 +173,19 @@
   <script>
     const flipCard = document.getElementById("flipCard");
     const downloadBtn = document.getElementById("downloadBtn");
+    let hideTimeout;
 
     flipCard.addEventListener("click", () => {
       flipCard.classList.toggle("flip");
     });
 
-    // টাচ করলে বাটন দেখাবে
+    // টাচ করলে বাটন ৩ সেকেন্ডের জন্য শো করবে
     document.addEventListener("touchstart", () => {
+      clearTimeout(hideTimeout);
       downloadBtn.style.display = "inline-block";
+      hideTimeout = setTimeout(() => {
+        downloadBtn.style.display = "none";
+      }, 3000);
     });
 
     function downloadPDF() {
