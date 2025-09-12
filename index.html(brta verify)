@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DM224029NP900</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f5f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 800px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .download-btn {
+      display: inline-block;
+      margin: 10px 5px;
+      padding: 10px 20px;
+      background: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .top-header {
+      background: linear-gradient(90deg, #0099cc, #8BC34A); /* বাম পাশে আকাশি, ডান পাশে হালকা সবুজ */
+      color: white;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-text {
+      flex: 1;
+      text-align: center;
+      line-height: 1.4em;
+    }
+    .header-text .bangla {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+    .header-text .english {
+      font-size: 1em;
+    }
+    .top-header img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+    .slider-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+      background: rgba(0, 153, 204, 0.05);
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .slider {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+      width: 200%;
+    }
+    .slide {
+      min-width: 100%;
+      min-height: 450px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slide img {
+      max-width: 500px;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      object-fit: contain;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .active-label {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 1.6em;
+      font-weight: bold;
+      color: green;
+      background: rgba(255,255,255,0.7);
+      padding: 2px 8px;
+      border-radius: 5px;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 0.85em;
+      color: #888;
+    }
+    .dots {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .dot {
+      display: inline-block;
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .dot.active {
+      background-color: #007bff;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        display: block;
+        background: white !important;
+      }
+      .download-btn,
+      .dots,
+      .footer,
+      .active-label,
+      .top-header {
+        display: none !important;
+      }
+      .slider-wrapper {
+        background: none !important;
+        overflow: visible !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 !important;
+      }
+      .slider {
+        display: block !important;
+        width: auto !important;
+        transform: none !important;
+      }
+      .slide {
+        min-width: auto !important;
+        margin-bottom: 0px;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Updated Header -->
+    <div class="top-header">
+      <img src="logo-left.png" alt="Left Logo"/>
+      <div class="header-text">
+        <div class="bangla">গণপ্রজাতন্ত্রী বাংলাদেশ</div>
+        <div class="english">People's Republic of Bangladesh</div>
+      </div>
+      <img src="logo-right.png" alt="Right Logo"/>
+    </div>
+
+    <div class="slider-wrapper">
+      <span class="active-label">ACTIVE</span>
+      <div class="slider" id="slider">
+        <div class="slide">
+          <img src="front.jpg" alt="Licence Front" id="frontImg"/>
+        </div>
+        <div class="slide">
+          <img src="back.jpg" alt="Licence Back" id="backImg"/>
+        </div>
+      </div>
+    </div>
+    <div class="dots">
+      <span class="dot active" onclick="goToSlide(0)"></span>
+      <span class="dot" onclick="goToSlide(1)"></span>
+    </div>
+    <div class="footer">© 2025 BRTA. All rights reserved.</div>
+    <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slider = document.getElementById("slider");
+    const dots = document.querySelectorAll(".dot");
+
+    function goToSlide(n) {
+      currentSlide = n;
+      slider.style.transform = `translateX(-${n * 100}%)`;
+      updateDots();
+    }
+
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === currentSlide);
+      });
+    }
+
+    // Swipe support (mobile)
+    let startX = 0;
+    slider.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
+    slider.addEventListener("touchend", e => {
+      let endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) {
+        if (currentSlide < 1) goToSlide(currentSlide + 1);
+      } else if (endX - startX > 50) {
+        if (currentSlide > 0) goToSlide(currentSlide - 1);
+      }
+    });
+
+    function downloadPDF() {
+      window.print();
+    }
+  </script>
+</body>
+</html>
