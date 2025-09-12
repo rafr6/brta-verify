@@ -1,234 +1,251 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DM224029NP900</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f5f9;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .container {
-      max-width: 800px;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .download-btn {
-      display: inline-block;
-      margin: 10px 5px;
-      padding: 10px 20px;
-      background: #ff5722;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DM224029NP900</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f5f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    width: 95%;
+    max-width: 600px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+  }
+
+  .download-btn {
+    display: none;
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    background: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    z-index: 1000;
+    transition: opacity 0.3s;
+  }
+
+  /* Header */
+  .top-header {
+    background: linear-gradient(90deg, #0099cc, #8BC34A);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .header-text {
+    flex: 1;
+    text-align: center;
+    line-height: 1.3em;
+    margin: 5px 0;
+  }
+  .header-text .bangla {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .header-text .english {
+    font-size: 1em;
+  }
+  .top-header img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin: 5px;
+  }
+
+  /* Status */
+  .status {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: green;
+    margin: 10px 0;
+  }
+
+  /* Flip System */
+  .flip-wrapper {
+    perspective: 1000px;
+    margin: 0 auto 15px auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flip-card {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+  }
+
+  .flip-card.flip {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card .side {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+  }
+
+  .flip-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    object-fit: contain;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .flip-card .back {
+    transform: rotateY(180deg);
+  }
+
+  /* Footer */
+  .footer-container {
+    width: 95%;
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto 40px auto;
+    padding-top: 10px;
+  }
+  .footer-container .footer {
+    font-size: 0.9em;
+    color: #888;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
     .top-header {
-      background: linear-gradient(90deg, #0099cc, #8BC34A); /* বাম পাশে আকাশি, ডান পাশে হালকা সবুজ */
-      color: white;
-      padding: 15px;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .header-text {
-      flex: 1;
-      text-align: center;
-      line-height: 1.4em;
-    }
-    .header-text .bangla {
-      font-size: 1.3em;
-      font-weight: bold;
-    }
-    .header-text .english {
-      font-size: 1em;
+      flex-direction: column;
     }
     .top-header img {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
+      width: 45px;
+      height: 45px;
     }
-    .slider-wrapper {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      width: 100%;
-      max-width: 500px;
-      margin: auto;
-      background: rgba(0, 153, 204, 0.05);
-      border-radius: 10px;
-      padding: 10px;
+    .header-text .bangla {
+      font-size: 1.1em;
     }
-    .slider {
-      display: flex;
-      transition: transform 0.4s ease-in-out;
-      width: 200%;
+    .header-text .english {
+      font-size: 0.95em;
     }
-    .slide {
-      min-width: 100%;
-      min-height: 450px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .flip-card {
+      max-width: 95%;
     }
-    .slide img {
-      max-width: 500px;
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      object-fit: contain;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    }
-    .active-label {
-      position: absolute;
-      top: 15px;
-      right: 25px;
-      font-size: 1.6em;
-      font-weight: bold;
-      color: green;
-      background: rgba(255,255,255,0.7);
-      padding: 2px 8px;
-      border-radius: 5px;
-    }
-    .footer {
-      margin-top: 20px;
-      font-size: 0.85em;
-      color: #888;
-    }
-    .dots {
-      text-align: center;
-      margin-top: 15px;
-    }
-    .dot {
-      display: inline-block;
-      height: 12px;
-      width: 12px;
-      margin: 0 5px;
-      background-color: #bbb;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .dot.active {
-      background-color: #007bff;
-    }
+  }
 
-    /* Print Styles */
-    @media print {
-      body {
-        display: block;
-        background: white !important;
-      }
-      .download-btn,
-      .dots,
-      .footer,
-      .active-label,
-      .top-header {
-        display: none !important;
-      }
-      .slider-wrapper {
-        background: none !important;
-        overflow: visible !important;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0 !important;
-      }
-      .slider {
-        display: block !important;
-        width: auto !important;
-        transform: none !important;
-      }
-      .slide {
-        min-width: auto !important;
-        margin-bottom: 0px;
-        display: flex;
-        justify-content: center;
-      }
+  /* Print Styles */
+  @media print {
+    body {
+      display: block;
+      background: white !important;
     }
-  </style>
+    .download-btn,
+    .footer-container,
+    .top-header,
+    .status {
+      display: none !important;
+    }
+    .flip-wrapper {
+      background: none !important;
+      overflow: visible !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 !important;
+    }
+    .flip-card {
+      transform: none !important;
+    }
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <!-- Updated Header -->
-    <div class="top-header">
-      <img src="logo-left.png" alt="Left Logo"/>
-      <div class="header-text">
-        <div class="bangla">গণপ্রজাতন্ত্রী বাংলাদেশ</div>
-        <div class="english">People's Republic of Bangladesh</div>
-      </div>
-      <img src="logo-right.png" alt="Right Logo"/>
-    </div>
 
-    <div class="slider-wrapper">
-      <span class="active-label">ACTIVE</span>
-      <div class="slider" id="slider">
-        <div class="slide">
-          <img src="front.jpg" alt="Licence Front" id="frontImg"/>
-        </div>
-        <div class="slide">
-          <img src="back.jpg" alt="Licence Back" id="backImg"/>
-        </div>
-      </div>
+<div class="container">
+  <!-- Header -->
+  <div class="top-header">
+    <img src="logo-left.png" alt="Left Logo"/>
+    <div class="header-text">
+      <div class="bangla">গণপ্রজাতন্ত্রী বাংলাদেশ</div>
+      <div class="english">People's Republic of Bangladesh</div>
     </div>
-    <div class="dots">
-      <span class="dot active" onclick="goToSlide(0)"></span>
-      <span class="dot" onclick="goToSlide(1)"></span>
-    </div>
-    <div class="footer">© 2025 BRTA. All rights reserved.</div>
-    <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
+    <img src="logo-right.png" alt="Right Logo"/>
   </div>
 
-  <script>
-    let currentSlide = 0;
-    const slider = document.getElementById("slider");
-    const dots = document.querySelectorAll(".dot");
+  <!-- Status -->
+  <div class="status">ACTIVE</div>
 
-    function goToSlide(n) {
-      currentSlide = n;
-      slider.style.transform = `translateX(-${n * 100}%)`;
-      updateDots();
-    }
+  <!-- Flip Card -->
+  <div class="flip-wrapper">
+    <div class="flip-card" id="flipCard">
+      <div class="side front">
+        <img src="front.jpg" alt="Licence Front"/>
+      </div>
+      <div class="side back">
+        <img src="back.jpg" alt="Licence Back"/>
+      </div>
+    </div>
+  </div>
+</div>
 
-    function updateDots() {
-      dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === currentSlide);
-      });
-    }
+<!-- Footer (outside container) -->
+<div class="footer-container">
+  <div class="footer">© 2025 BRTA. All rights reserved.</div>
+</div>
 
-    // Swipe support (mobile)
-    let startX = 0;
-    slider.addEventListener("touchstart", e => {
-      startX = e.touches[0].clientX;
-    });
-    slider.addEventListener("touchend", e => {
-      let endX = e.changedTouches[0].clientX;
-      if (startX - endX > 50) {
-        if (currentSlide < 1) goToSlide(currentSlide + 1);
-      } else if (endX - startX > 50) {
-        if (currentSlide > 0) goToSlide(currentSlide - 1);
-      }
-    });
+<!-- Download PDF Button -->
+<button class="download-btn" id="pdfBtn" onclick="downloadPDF()">Download PDF</button>
 
-    function downloadPDF() {
-      window.print();
-    }
-  </script>
+<script>
+const flipCard = document.getElementById("flipCard");
+const pdfBtn = document.getElementById("pdfBtn");
+let pdfTimeout;
+
+flipCard.addEventListener("click", () => {
+  flipCard.classList.toggle("flip");
+});
+
+// Show PDF button on touch/click, hide after 3 seconds
+document.body.addEventListener("click", () => {
+  pdfBtn.style.display = "inline-block";
+  clearTimeout(pdfTimeout);
+  pdfTimeout = setTimeout(() => {
+    pdfBtn.style.display = "none";
+  }, 3000);
+});
+
+function downloadPDF() {
+  window.print();
+}
+</script>
+
 </body>
 </html>
