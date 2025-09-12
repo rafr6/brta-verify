@@ -23,9 +23,12 @@
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .download-btn {
-      display: none; /* ডিফল্টে হাইড থাকবে */
+      display: none; /* শুরুতে হাইড থাকবে */
       margin: 15px auto;
       padding: 12px 24px;
       background: #ff5722;
@@ -44,6 +47,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      width: 100%;
     }
     .header-text {
       flex: 1;
@@ -66,7 +70,7 @@
     /* Flip System */
     .flip-wrapper {
       perspective: 1000px;
-      margin: 0 auto;
+      margin: 20px auto;
       width: 100%;
       max-width: 600px;
       min-height: 450px;
@@ -98,6 +102,8 @@
       border: 1px solid #ddd;
       object-fit: contain;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: block;
+      margin: 0 auto;
     }
     .flip-card .back {
       transform: rotateY(180deg);
@@ -106,7 +112,9 @@
     .footer {
       margin-top: 25px;
       font-size: 0.9em;
-      color: #333; /* আরও স্পষ্ট কালার */
+      color: #555;
+      text-align: center;
+      width: 100%;
     }
 
     /* Print Styles */
@@ -116,6 +124,7 @@
         background: white !important;
       }
       .download-btn,
+      .footer,
       .top-header {
         display: none !important;
       }
@@ -164,19 +173,14 @@
   <script>
     const flipCard = document.getElementById("flipCard");
     const downloadBtn = document.getElementById("downloadBtn");
-    let hideTimeout;
 
     flipCard.addEventListener("click", () => {
       flipCard.classList.toggle("flip");
     });
 
-    // স্ক্রিনে টাচ করলে ডাউনলোড বাটন শো করবে
+    // টাচ করলে বাটন দেখাবে
     document.addEventListener("touchstart", () => {
       downloadBtn.style.display = "inline-block";
-      clearTimeout(hideTimeout);
-      hideTimeout = setTimeout(() => {
-        downloadBtn.style.display = "none";
-      }, 3000); // ৩ সেকেন্ড পর আবার হাইড
     });
 
     function downloadPDF() {
