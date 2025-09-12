@@ -24,12 +24,11 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
       position: relative;
-      margin-bottom: 60px; /* Footer space */
     }
     .download-btn {
       display: none;
       position: fixed;
-      bottom: 80px; /* উপরে তুলা হয়েছে */
+      bottom: 100px; /* উপরে তুলা হয়েছে */
       left: 50%;
       transform: translateX(-50%);
       padding: 12px 24px;
@@ -79,7 +78,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 20px; /* Footer থেকে স্পেস */
+      margin-bottom: 20px;
     }
     .flip-card {
       position: relative;
@@ -109,11 +108,16 @@
       transform: rotateY(180deg);
     }
 
-    .footer {
+    /* Footer fixed after container */
+    .footer-container {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      margin: 10px 0 40px 0;
+    }
+    .footer-container .footer {
       font-size: 0.9em;
       color: #888;
-      text-align: center;
-      margin-bottom: 20px; /* Footer spacing from bottom */
     }
 
     /* Print Styles */
@@ -123,7 +127,7 @@
         background: white !important;
       }
       .download-btn,
-      .footer,
+      .footer-container,
       .top-header {
         display: none !important;
       }
@@ -167,7 +171,9 @@
   </div>
 
   <!-- Footer -->
-  <div class="footer">© 2025 BRTA. All rights reserved.</div>
+  <div class="footer-container">
+    <div class="footer">© 2025 BRTA. All rights reserved.</div>
+  </div>
 
   <!-- Download PDF Button -->
   <button class="download-btn" id="pdfBtn" onclick="downloadPDF()">Download PDF</button>
