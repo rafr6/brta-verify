@@ -1,201 +1,197 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DM224029NP900</title>
-  <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DM224029NP900</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f5f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .container {
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh; /* পেইজ ছোট করা হলো */
+    position: relative;
+  }
+  .download-btn {
+    display: none;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .top-header {
+    background: linear-gradient(90deg, #0099cc, #8BC34A);
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .header-text {
+    flex: 1;
+    text-align: center;
+    line-height: 1.4em;
+  }
+  .header-text .bangla {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .header-text .english {
+    font-size: 0.95em;
+  }
+  .top-header img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+  .flip-wrapper {
+    perspective: 1000px;
+    margin: 15px auto;
+    width: 100%;
+    max-width: 600px;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flip-card {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+    outline: none; /* লাল বর্ডার সরানো */
+    -webkit-tap-highlight-color: transparent; /* মোবাইলে লাল হাইলাইট সরানো */
+  }
+  .flip-card.flip {
+    transform: rotateY(180deg);
+  }
+  .flip-card .side {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+  }
+  .flip-card img {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    object-fit: contain;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: block;
+    margin: 0 auto;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+  .flip-card .back {
+    transform: rotateY(180deg);
+  }
+  .footer {
+    font-size: 0.9em;
+    color: #333;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  @media print {
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f5f9;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
+      display: block;
+      background: white !important;
     }
-    .container {
-      width: 100%;
-      max-width: 900px;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
+    .download-btn,
+    .footer,
+    .top-header {
+      display: none !important;
+    }
+    .flip-wrapper {
+      background: none !important;
+      overflow: visible !important;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 85vh; /* পেজ ছোট করা হলো */
-      position: relative;
-    }
-    .download-btn {
-      display: none; /* শুরুতে হাইড থাকবে */
-      margin: 15px auto;
-      padding: 12px 24px;
-      background: #ff5722;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1em;
-    }
-    .top-header {
-      background: linear-gradient(90deg, #0099cc, #8BC34A);
-      color: white;
-      padding: 15px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-    }
-    .header-text {
-      flex: 1;
-      text-align: center;
-      line-height: 1.4em;
-    }
-    .header-text .bangla {
-      font-size: 1.3em;
-      font-weight: bold;
-    }
-    .header-text .english {
-      font-size: 1em;
-    }
-    .top-header img {
-      width: 55px;
-      height: 55px;
-      object-fit: contain;
-    }
-    /* Flip System */
-    .flip-wrapper {
-      perspective: 1000px;
-      margin: 20px auto;
-      width: 100%;
-      max-width: 600px;
-      min-height: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 0 !important;
     }
     .flip-card {
-      position: relative;
-      width: 100%;
-      height: auto;
-      transform-style: preserve-3d;
-      transition: transform 0.6s;
-      cursor: pointer;
-      outline: none; /* লাল বর্ডার সরানো হলো */
-      -webkit-tap-highlight-color: transparent; /* মোবাইলে লাল হাইলাইট সরানো হলো */
+      transform: none !important;
     }
-    .flip-card.flip {
-      transform: rotateY(180deg);
-    }
-    .flip-card .side {
-      position: absolute;
-      width: 100%;
-      backface-visibility: hidden;
-    }
-    .flip-card img {
-      max-width: 600px;
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      border: 1px solid #ddd;
-      object-fit: contain;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      display: block;
-      margin: 0 auto;
-      -webkit-user-drag: none;
-      user-select: none;
-    }
-    .flip-card .back {
-      transform: rotateY(180deg);
-    }
-    .footer {
-      font-size: 0.9em;
-      color: #333;
-      text-align: center;
-      width: 100%;
-      padding: 15px 0;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-    }
-    /* Print Styles */
-    @media print {
-      body {
-        display: block;
-        background: white !important;
-      }
-      .download-btn,
-      .footer,
-      .top-header {
-        display: none !important;
-      }
-      .flip-wrapper {
-        background: none !important;
-        overflow: visible !important;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0 !important;
-      }
-      .flip-card {
-        transform: none !important;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <!-- Updated Header -->
-    <div class="top-header">
-      <img src="logo-left.png" alt="Left Logo"/>
-      <div class="header-text">
-        <div class="bangla">গণপ্রজাতন্ত্রী বাংলাদেশ</div>
-        <div class="english">People's Republic of Bangladesh</div>
-      </div>
-      <img src="logo-right.png" alt="Right Logo"/>
+<div class="container">
+  <div class="top-header">
+    <img src="logo-left.png" alt="Left Logo"/>
+    <div class="header-text">
+      <div class="bangla">গণপ্রজাতন্ত্রী বাংলাদেশ</div>
+      <div class="english">People's Republic of Bangladesh</div>
     </div>
-
-    <!-- Flip Card -->
-    <div class="flip-wrapper">
-      <div class="flip-card" id="flipCard">
-        <div class="side front">
-          <img src="front.jpg" alt="Licence Front"/>
-        </div>
-        <div class="side back">
-          <img src="back.jpg" alt="Licence Back"/>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">© 2025 BRTA. All rights reserved.</div>
-    <button class="download-btn" id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
+    <img src="logo-right.png" alt="Right Logo"/>
   </div>
 
-  <script>
-    const flipCard = document.getElementById("flipCard");
-    const downloadBtn = document.getElementById("downloadBtn");
-    let hideTimeout;
+  <div class="flip-wrapper">
+    <div class="flip-card" id="flipCard">
+      <div class="side front">
+        <img src="front.jpg" alt="Licence Front"/>
+      </div>
+      <div class="side back">
+        <img src="back.jpg" alt="Licence Back"/>
+      </div>
+    </div>
+  </div>
 
-    flipCard.addEventListener("click", () => {
-      flipCard.classList.toggle("flip");
-    });
+  <div class="footer">© 2025 BRTA. All rights reserved.</div>
+  <button class="download-btn" id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
+</div>
 
-    // টাচ করলে বাটন ৩ সেকেন্ডের জন্য শো করবে
-    document.addEventListener("touchstart", () => {
-      clearTimeout(hideTimeout);
-      downloadBtn.style.display = "inline-block";
-      hideTimeout = setTimeout(() => {
-        downloadBtn.style.display = "none";
-      }, 3000);
-    });
+<script>
+const flipCard = document.getElementById("flipCard");
+const downloadBtn = document.getElementById("downloadBtn");
+let hideTimeout;
 
-    function downloadPDF() {
-      window.print();
-    }
-  </script>
+flipCard.addEventListener("click", () => {
+  flipCard.classList.toggle("flip");
+});
+
+// মোবাইলে টাচ করলে বাটন ২.৫ সেকেন্ডের জন্য দেখাবে
+document.addEventListener("touchstart", () => {
+  clearTimeout(hideTimeout);
+  downloadBtn.style.display = "inline-block";
+  hideTimeout = setTimeout(() => {
+    downloadBtn.style.display = "none";
+  }, 2500);
+});
+
+function downloadPDF() {
+  window.print();
+}
+</script>
 </body>
 </html>
