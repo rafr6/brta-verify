@@ -73,25 +73,21 @@
       text-align: right;
       margin: 5px 15px 10px 0;
     }
-    .status-box {
-      display: inline-block;
-      background: #d0d7df; /* কার্ডের পিছনের ব্যাকগ্রাউন্ডের থেকে গাঢ় */
-      padding: 8px 14px;
-      border-radius: 6px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
     .status .label {
       font-size: 0.85em;
       font-weight: bold;
-      color: #333;
-      display: block;
+      color: #333; /* স্পষ্ট কালার */
+      display: inline-block;
+      padding: 5px 10px;
+      background: #d9e3ed; /* flip-wrapper ব্যাকগ্রাউন্ড থেকে গাড় */
+      border-radius: 6px;
     }
     .status .value {
       font-size: 1.1em;
       font-weight: bold;
-      color: green;
+      color: green; /* Active সবুজ */
       display: block;
+      margin-top: 4px;
     }
 
     /* Flip Wrapper */
@@ -189,10 +185,8 @@
 
     <!-- Status -->
     <div class="status">
-      <div class="status-box">
-        <span class="label">Status</span>
-        <span class="value">Active</span>
-      </div>
+      <span class="label">Status</span>
+      <span class="value">Active</span>
     </div>
 
     <!-- Flip Card -->
